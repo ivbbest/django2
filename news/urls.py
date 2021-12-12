@@ -36,7 +36,13 @@ urlpatterns = [
     path('latest_news/', views.latest_news, name='latest_news_handler'),
     path('robots.txt', views.robots_handler, name='robots_txt'),
     path('polls/<int:question_id>/', detail, name='detail'),
+
+    path('summernote/', include('django_summernote.urls')),
     path('admin/', admin.site.urls),
-    path('__debug__/', include(debug_toolbar.urls)),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+if settings.DEBUG:
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
