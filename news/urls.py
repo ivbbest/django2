@@ -19,21 +19,19 @@ import debug_toolbar
 from django.contrib import admin
 from django.urls import path
 from polls.views import index, detail
-
 from django.conf import settings
 from django.conf.urls.static import static
-
 from blogs import views
 from django.urls import include, path
 
+
 urlpatterns = [
     path('', index, name='index'),
-
     path('blog/', views.blog_handler, name='blog_handler'),
     path('page/', views.page_handler, name='page_handler'),
     path('about/', views.about_handler, name='about_handler'),
     path('index/', views.index_handler, name='index_handler'),
-    path('categori/', views.categori_handler, name='categori_handler'),
+    path('category/', views.category_handler, name='category_handler'),
     path('contact/', views.contact_handler, name='contact_handler'),
     path('latest_news/', views.latest_news, name='latest_news_handler'),
     path('robots.txt', views.robots_handler, name='robots_txt'),

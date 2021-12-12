@@ -26,9 +26,9 @@ def about_handler(request):
     return render(request, 'news/about.html', context)
 
 
-def categori_handler(request):
+def category_handler(request):
     context = {}
-    return render(request, 'news/сategori.html', context)
+    return render(request, 'news/category.html', context)
 
 
 def latest_news(request):
