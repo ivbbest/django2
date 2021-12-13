@@ -14,11 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-
 import debug_toolbar
 from django.contrib import admin
 from django.urls import path
-from polls.views import index, detail
 from django.conf import settings
 from django.conf.urls.static import static
 from blogs import views
@@ -26,16 +24,14 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', views.index_handler, name='index_handler'),
     path('blog/', views.blog_handler, name='blog_handler'),
     path('page/', views.page_handler, name='page_handler'),
     path('about/', views.about_handler, name='about_handler'),
-    path('index/', views.index_handler, name='index_handler'),
     path('category/', views.category_handler, name='category_handler'),
     path('contact/', views.contact_handler, name='contact_handler'),
     path('latest_news/', views.latest_news, name='latest_news_handler'),
     path('robots.txt', views.robots_handler, name='robots_txt'),
-    path('polls/<int:question_id>/', detail, name='detail'),
 
     path('summernote/', include('django_summernote.urls')),
     path('admin/', admin.site.urls),
