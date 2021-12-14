@@ -4,6 +4,7 @@ from datetime import datetime
 import re
 from blogs.models import Article, Author, Category
 from concurrent.futures import ThreadPoolExecutor
+from django.utils.timezone import make_aware
 
 #author = Author.object.get(id=3)
 
@@ -96,7 +97,7 @@ def crawl_one(url):
         'slug': slugify(name),
         'content': my_content,
         'main_image': img_path,
-        'pub_date': pub_date,
+        'pub_date': make_aware(pub_date),
         'short_description': short_description.strip(),
         'author': author
     }
@@ -112,11 +113,22 @@ def crawl_one(url):
 
 def get_fresh_news():
     base_url = 'https://www.semrush.com/blog/category/advanced-seo/'
+    params = {'page': 1}
+    links = []
 
-    with HTMLSession() as session:
-        response = session.get(base_url)
+    while True:
+        breakpoint()
+        with HTMLSession() as session:
+            response = session.get(base_url, params=params)
+            if response.status_code == 200:
+                links.append(response.html.absolute_links)
+                params['page'] += 1
 
-    links = response.html.absolute_links
+            else:
+                break
+
+
+    #links = response.html.absolute_links
 
     fresh_news = [lnk for lnk in links if ('/blog/' in lnk) and ('/category/' not in lnk)]
 
