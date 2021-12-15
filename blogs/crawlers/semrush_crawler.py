@@ -1,3 +1,5 @@
+import sys
+
 from requests_html import HTMLSession
 from slugify import slugify
 from datetime import datetime
@@ -21,8 +23,8 @@ def crawl_one(url):
         pub_date = response.html.xpath("//span[@data-test='date']")[0].text
         cats = ['SEO', 'Python', 'Advanced SEO']      # задаем вручную т.к. в статье нет категорий
 
-    except Exception:
-        print('Truuble')
+    except Exception as e:
+        print(f'[{url}]', e, type(e), sys.exc_info()[-1].tb_lineno)
 
     # парсим информацию по автору согласно модели: имя, био, картинка
 
