@@ -111,26 +111,20 @@ def crawl_one(url):
         article.categories.add(cat)
 
 
+# реализовал парсинг всех страниц с учетом пагинации
+# так как у сайта есть проблемы с кодом ответа 404, то вручную задал количество страниц
+
 def get_fresh_news():
     base_url = 'https://www.semrush.com/blog/category/advanced-seo/'
-    params = {'page': 1}
-    links = []
+    links = list()
 
-    while True:
-        breakpoint()
+    for i in range(1, 5):
         with HTMLSession() as session:
+            params = {'page': i}
             response = session.get(base_url, params=params)
-            if response.status_code == 200:
-                links.append(response.html.absolute_links)
-                params['page'] += 1
+            links = set(links) | response.html.absolute_links
 
-            else:
-                break
-
-
-    #links = response.html.absolute_links
-
-    fresh_news = [lnk for lnk in links if ('/blog/' in lnk) and ('/category/' not in lnk)]
+    fresh_news = [lnk for lnk in list(links) if ('/blog/' in lnk) and ('/category/' not in lnk)]
 
     return fresh_news
 
@@ -140,6 +134,3 @@ def run():
 
     with ThreadPoolExecutor(max_workers=6) as executor:
         executor.map(crawl_one, fresh_news)
-
-    # for news in fresh_news:
-    #     crawl_one(news)
