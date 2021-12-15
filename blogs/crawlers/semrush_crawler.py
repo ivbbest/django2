@@ -8,8 +8,6 @@ from blogs.models import Article, Author, Category
 from concurrent.futures import ThreadPoolExecutor
 from django.utils.timezone import make_aware
 
-#author = Author.object.get(id=3)
-
 
 def crawl_one(url):
     with HTMLSession() as session:
