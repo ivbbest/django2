@@ -24,13 +24,13 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('', views.index_handler, name='index_handler'),
-    path('blog/', views.blog_handler, name='blog_handler'),
-    path('page/', views.page_handler, name='page_handler'),
-    path('about/', views.about_handler, name='about_handler'),
-    path('category/', views.category_handler, name='category_handler'),
-    path('contact/', views.contact_handler, name='contact_handler'),
-    path('latest_news/', views.latest_news, name='latest_news_handler'),
+    path('', views.index_handler, name='homepage'),
+    path('blog/', views.blog_handler, name='blog'),
+    path('page/', views.page_handler, name='article'),
+    path('about/', views.about_handler, name='about'),
+    path('category/', views.category_handler, name='category'),
+    path('contact/', views.contact_handler, name='contact'),
+    path('latest_news/', views.latest_news, name='latest_news'),
     path('robots.txt', views.robots_handler, name='robots_txt'),
 
     path('summernote/', include('django_summernote.urls')),

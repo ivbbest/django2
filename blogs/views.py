@@ -1,7 +1,13 @@
 from django.shortcuts import render
+from .models import Article
+
 
 def index_handler(request):
-    context = {}
+    last_articles = Article.object.all().order_by('-pub_date')[:5]
+    first_articles = Article.object.all().order_by('pub_date')[:5]
+    context = {'last_articles': last_articles,
+               'first_articles': first_articles,
+               }
     return render(request, 'news/index.html', context)
 
 

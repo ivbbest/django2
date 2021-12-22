@@ -1,3 +1,5 @@
+{% load static %}
+
 <header>
   <!-- Header Start -->
   <div class="header-area">
@@ -31,8 +33,8 @@
             <!-- Logo -->
             <div class="col-xl-3 col-lg-3 col-md-3 d-none d-md-block">
               <div class="logo">
-                <a href="/index/"
-                  ><img src="/static/img/logo/logo.png" alt=""
+                <a href="{% url 'homepage' %}">
+                  <img src="{% static 'img/logo/logo.png' %}" alt=""
                 /></a>
               </div>
             </div>
@@ -46,26 +48,26 @@
             <div class="col-xl-8 col-lg-8 col-md-12 header-flex">
               <!-- sticky -->
               <div class="sticky-logo">
-                <a href="/index/"
-                  ><img src="/static/img/logo/logo.png" alt=""
-                /></a>
+                <a href="{% url 'homepage' %}">
+                  <img src="{% static 'img/logo/logo.png' %}" alt=""/>
+                </a>
               </div>
               <!-- Main-menu -->
               <div class="main-menu d-none d-md-block">
                 <nav>
                   <ul id="navigation">
-                    <li><a href="/index/">Home</a></li>
-                    <li><a href="/about/">about</a></li>
-                    <li><a href="/category/">Category</a></li>
-                    <li><a href="/latest_news/">Latest News</a></li>
+                    <li><a href="{% url 'homepage' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">about</a></li>
+                    <li><a href="{% url 'category' %}">Category</a></li>
+                    <li><a href="{% url 'latest_news' %}">Latest News</a></li>
                     <li>
                       <a href="#">Pages</a>
                       <ul class="submenu">
-                        <li><a href="/blog/">Blog</a></li>
-                        <li><a href="/page/">Blog Details</a></li>
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'article' %}">Blog Details</a></li>
                       </ul>
                     </li>
-                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
                   </ul>
                 </nav>
               </div>
