@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+def index_handler(request):
+    context = {}
+    return render(request, 'news/index.html', context)
+
 
 def blog_handler(request):
     context = {}
@@ -16,9 +20,7 @@ def contact_handler(request):
     return render(request, 'news/contact.html', context)
 
 
-def index_handler(request):
-    context = {}
-    return render(request, 'news/index.html', context)
+
 
 
 def about_handler(request):
