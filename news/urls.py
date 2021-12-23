@@ -26,9 +26,10 @@ from django.urls import include, path
 urlpatterns = [
     path('', views.index_handler, name='homepage'),
     path('blog/', views.blog_handler, name='blog'),
-    path('page/', views.page_handler, name='article'),
+    path('<cat_slug>', views.category_handler, name='category'),
+    path('post/<slug>', views.page_handler, name='article'),
     path('about/', views.about_handler, name='about'),
-    path('category/', views.category_handler, name='category'),
+    path('category/', views.category_handler, name='category_old'),
     path('contact/', views.contact_handler, name='contact'),
     path('latest_news/', views.latest_news, name='latest_news'),
     path('robots.txt', views.robots_handler, name='robots_txt'),

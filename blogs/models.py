@@ -8,7 +8,7 @@ class Category(models.Model):
     in_menu = models.BooleanField(default=True)
     order = models.IntegerField(default=1)
 
-    object = models.Manager()
+    #object = models.Manager()
 
     def __str__(self):
         return self.name
