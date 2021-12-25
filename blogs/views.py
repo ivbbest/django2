@@ -35,12 +35,12 @@ def blog_handler(request):
     return render(request, 'news/blog.html', context)
 
 
-def category_handler(request, cat_slug):
+def category_handler(request, slug):
     context = {}
     return render(request, 'news/blog.html', context)
 
 
-def page_handler(request, post_slug):
+def page_handler(request, slug):
     context = {}
     return render(request, 'news/page.html', context)
 
