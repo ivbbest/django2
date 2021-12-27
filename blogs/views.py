@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Article, Category
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def index_handler(request):
@@ -48,7 +49,25 @@ def blog_handler(request, **kwargs):
 
 
 def page_handler(request, slug):
-    context = {}
+    main_article = Article.objects.get(slug=slug)
+
+    try:
+        prev_article = Article.objects.get(id=main_article.id-1)
+    except ObjectDoesNotExist:
+        prev_article = None
+
+    try:
+        next_article = Article.objects.get(id=main_article.id+1)
+    except ObjectDoesNotExist:
+        next_article = None
+
+
+    context = {
+        'article': main_article,
+        'prev_article': prev_article,
+        'next_article': next_article
+
+    }
     return render(request, 'news/page.html', context)
 
 

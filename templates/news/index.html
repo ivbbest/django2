@@ -31,8 +31,14 @@
                                         <img src="{{article.main_image.url}}" alt="">
                                         </a>
                                         <div class="trend-top-cap">
-                                            <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="200ms">{{article.categories.all|first}}</span>
-                                            <h2><a href="{% url 'article' article.slug %}" data-animation="fadeInUp" data-delay=".2s" data-duration="200ms">{{article.name}}</a></h2>
+                                            <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="200ms">
+                                                {{article.categories.first.name|title}}
+                                            </span>
+                                            <h2>
+                                                <a href="{% url 'article' article.slug %}" data-animation="fadeInUp" data-delay=".2s" data-duration="200ms">
+                                                {{article.name}}
+                                            </a>
+                                            </h2>
                                             <p data-animation="fadeInUp" data-delay=".2s" data-duration="200ms">by
                                                 {{article.author}}   -   {{article.pub_date}}
 

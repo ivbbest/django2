@@ -7,6 +7,7 @@ from django.utils.html import format_html
 from threading import Thread
 #from blogs.crawlers.semrush_crawler import run
 
+
 def count_words(modeladmin, request, queryset):
     for object in queryset:
         text = object.content.replace('<p>', '').replace('</p>', '')
@@ -27,6 +28,10 @@ def get_fresh_news(modeladmin, request, queryset):
 get_fresh_news.short_description = 'Get fresh news'
 
 
+class CommentArticleInLine(admin.TabularInline):
+    model = Comment
+
+
 class ArticleAdmin(SummernoteModelAdmin):
     summernote_fields = ('content', 'short_description',)
     list_display = ('image_code', 'name', 'pub_date', 'author',
@@ -34,12 +39,14 @@ class ArticleAdmin(SummernoteModelAdmin):
     list_filter = ('name', 'author',)
     search_fields = ('name', 'author')
     actions = (count_words, )
+    inlines = (CommentArticleInLine, )
 
     def image_code(self, object):
         return format_html(
             '<img src="{}" style="max-width: 100px" />',
             object.main_image.url
         )
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'in_menu', 'order')
