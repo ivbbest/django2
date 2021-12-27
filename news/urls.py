@@ -26,7 +26,7 @@ from django.urls import include, path
 urlpatterns = [
     path('', views.index_handler, name='homepage'),
     path('blog/', views.blog_handler, name='blog'),
-    path('<slug>', views.category_handler, name='category'),
+    path('<slug>', views.blog_handler, name='category'),
     path('post/<slug>', views.page_handler, name='article'),
     path('about/', views.about_handler, name='about'),
     path('category/', views.category_handler, name='category_old'),

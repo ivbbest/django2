@@ -1,43 +1,50 @@
 from django.shortcuts import render
 from .models import Article, Category
-from django.db.models import Count
 
 
 def index_handler(request):
-    last_articles = Article.object.all().order_by('-pub_date')[:5].prefetch_related('categories')
-    first_articles = Article.object.all().order_by('pub_date')[:5].prefetch_related('categories')
-
-    # плохой способ взять 3 первых категории и вывести их в меню
-    # menu_categories = []
-    #
-    # for cat in Category.object.all().prefetch_related('article_set'):
-    #     menu_categories.append((cat, cat.article_set.all().count()))
-    #
-    # menu_categories.sort(key=lambda x: x[1], reverse=True)
-    #
-    # menu_categories = [x[0] for x in menu_categories[:3]]
-
-    menu_categories = Category.objects.annotate(
-        count=Count('article')).order_by('count')[:3]
+    last_articles = Article.objects.all().order_by('-pub_date')[:5].prefetch_related('categories')
+    first_articles = Article.objects.all().order_by('pub_date')[:5].prefetch_related('categories')
 
     context = {'last_articles': last_articles,
                'first_articles': first_articles,
-               'menu_categories': menu_categories
                }
 
     return render(request, 'news/index.html', context)
 
 
-def blog_handler(request):
-    last_articles = Article.object.all().order_by('pub_date')[:10].prefetch_related('categories')
-    context = {'last_articles': last_articles}
+def blog_handler(request, **kwargs):
+    cat_slug = kwargs.get('cat_slug')
 
+    if cat_slug:
+        category = Category.objects.get(slug=cat_slug)
+        last_articles = Article.objects.all().filter(
+            categories__slug=cat_slug).order_by(
+            '-pub_date')[:5].prefetch_related('categories')
+
+    else:
+        last_articles = Article.objects.all().order_by(
+            '-pub_date')[:5].prefetch_related('categories')
+        category = None
+
+    context = {
+        'last_articles': last_articles,
+        'category': category
+    }
     return render(request, 'news/blog.html', context)
 
 
-def category_handler(request, slug):
-    context = {}
-    return render(request, 'news/blog.html', context)
+# def category_handler(request, slug):
+#     category = Category.objects.get(slug=slug)
+#     last_articles = Article.objects.all().filter(
+#         categories__slug=slug).order_by(
+#         '-pub_date')[:5].prefetch_related('categories')
+#
+#     context = {
+#         'last_articles': last_articles,
+#         'category': category
+#     }
+#     return render(request, 'news/blog.html', context)
 
 
 def page_handler(request, slug):
@@ -48,6 +55,7 @@ def page_handler(request, slug):
 def contact_handler(request):
     context = {}
     return render(request, 'news/contact.html', context)
+
 
 def about_handler(request):
     context = {}

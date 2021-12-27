@@ -8,7 +8,7 @@ class Category(models.Model):
     in_menu = models.BooleanField(default=True)
     order = models.IntegerField(default=1)
 
-    #object = models.Manager()
+    objects = models.Manager()
 
     def __str__(self):
         return self.name
@@ -39,7 +39,7 @@ class Article(models.Model):
     categories = models.ManyToManyField(Category)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
-    object = models.Manager()
+    objects = models.Manager()
 
     def __str__(self):
         return self.name

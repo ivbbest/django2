@@ -4,7 +4,9 @@
 
     <!--================Blog Area =================-->
     <section class="blog_area section-padding">
+
         <div class="container">
+            <h3>jkgdfjbgdfhgd</h3>
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
@@ -23,7 +25,7 @@
                                 </a>
                                 <p>{{article.short_description}}</p>
                                 <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> {{article.categories.all|first}}</a></li>
+                                    <li><a href="#"><i class="fa fa-user"></i> {{article.categories.first.name|title}}</a></li>
                                     <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                                 </ul>
                             </div>
