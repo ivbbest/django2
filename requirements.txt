@@ -1,0 +1,7 @@
+Django==3.2.9
+django-debug-toolbar==3.2.2
+django-summernote==0.8.20.0
+requests==2.22.0
+requests-html==0.10.0
+requests-unixsocket==0.2.0
+urllib3==1.25.8
